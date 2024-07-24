@@ -4,7 +4,6 @@ import { Logo, Menu, SearchBar } from './components'
 import { MoviesContainer } from './components/MoviesContainer'
 
 function App() {
-
   return (
     <div>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#282c34', minHeight: '100vh', color: 'white', width: '1240px' }}>

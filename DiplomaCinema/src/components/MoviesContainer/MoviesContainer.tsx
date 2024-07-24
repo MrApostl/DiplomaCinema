@@ -2,19 +2,19 @@ import { Box, Button, Typography } from "@mui/material";
 import { MovieCard } from "./MovieCard";
 import { useDispatch, useSelector } from 'react-redux'
 import { IMovieState } from "../../types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { loadMovies } from "../../redux/action-creaters";
 
 export const MoviesContainer = () => {
     const dispatch = useDispatch();
-    const { movies, currentPage, totalResults } = useSelector((state: IMovieState) => state);
+    const { movies, currentPage, totalResults, query } = useSelector((state: IMovieState) => state);
 
     useEffect(() => {
-        dispatch(loadMovies(currentPage));
-    }, [dispatch, currentPage]);
+        dispatch(loadMovies(currentPage, query));
+    }, [currentPage, query]);
 
     const handlePageChange = (page: number) => {
-        dispatch(loadMovies(page));
+        dispatch(loadMovies(page, query));
     };
 
     const handleNextPage = () => {
@@ -29,8 +29,6 @@ export const MoviesContainer = () => {
         }
     };
 
-    console.log(totalResults);
-    
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>

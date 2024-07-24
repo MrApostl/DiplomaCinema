@@ -12,6 +12,7 @@ export interface IMovieState {
     movies: IMovieOptions[];
     currentPage: number;
     totalResults: number;
+    query: string;
 }
 
 export interface IMoviesResponse {
