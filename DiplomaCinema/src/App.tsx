@@ -1,7 +1,6 @@
 import { AppBar, Box, CssBaseline, Toolbar } from '@mui/material'
 import './App.css'
 import { Logo, Menu, SearchBar } from './components'
-import { movies } from './movies'
 import { MoviesContainer } from './components/MoviesContainer'
 
 function App() {
@@ -17,9 +16,9 @@ function App() {
                 </Toolbar>
             </AppBar>
             <SearchBar placeholder="Search" />
-            <MoviesContainer movies={movies} />
+            <MoviesContainer/>
         </Box>
-    </div>
+    </div> 
   )
 }
 

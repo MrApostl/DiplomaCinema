@@ -1,9 +1,11 @@
 export interface IMovie {
-    id: number;
-    title: string;
-    image: string;
-    rating: number;
-    genres: string[];
+    Title: string;
+    Year: string;
+    imdbID: string;
+    Type: string;
+    Poster: string;
+    Genre?: string[];
+    imdbRating?: string;
 }
 
 export interface IMoviesContainerProps {
