@@ -18,6 +18,7 @@ export interface IMovieState {
     totalResults: number;
     query: string;
     error: string;
+    loading: boolean;
 }
 
 export interface IMoviesResponse {

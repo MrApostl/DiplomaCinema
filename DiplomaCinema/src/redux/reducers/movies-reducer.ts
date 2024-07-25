@@ -1,9 +1,10 @@
 import { IMovieOptions, IMovieState } from "../../types";
-import { SET_CURRENT_PAGE, SET_MOVIES, SET_TOTAL_RESULTS, SET_QUERY, LOAD_MOVIE_DETAIL_ERROR, LOAD_MOVIE_DETAIL_SUCCESS, LOAD_MOVIE_DETAIL, LOAD_MOVIES_ERROR } from "../action-types";
+import { SET_CURRENT_PAGE, SET_MOVIES, SET_TOTAL_RESULTS, SET_QUERY, LOAD_MOVIE_DETAIL_ERROR, LOAD_MOVIE_DETAIL_SUCCESS, LOAD_MOVIE_DETAIL, LOAD_MOVIES_ERROR, LOAD_MOVIES, LOAD_MOVIES_SUCCESS } from "../action-types";
 
 const initialState: IMovieState = {
     movies: [] as IMovieOptions[],
     error: '',
+    loading: false,
     selectedMovie: {} as IMovieOptions,
     currentPage: 1,
     totalResults: 0,
@@ -40,27 +41,47 @@ const movieReducer = (state = initialState, action: any)  => {
                     query: !!action.query ? action.query : '',
                 });
             };
+
+        case LOAD_MOVIES:
+            return {
+                ...state,
+                error: '',
+                loading: true,
+            };
+
+        case LOAD_MOVIES_SUCCESS:
+            return {
+                ...state,
+                error: '',
+                loading: false,
+            };
             
         case LOAD_MOVIE_DETAIL:
             return {
                 ...state,
                 error: '',
+                loading: true,
             };
+
         case LOAD_MOVIE_DETAIL_SUCCESS:
             return {
                 ...state,
                 selectedMovie: action.movie,
+                loading: false,
             };
+
         case LOAD_MOVIE_DETAIL_ERROR:
             return {
                 ...state,
                 error: action.error,
+                loading: false,
             };
 
         case LOAD_MOVIES_ERROR:
             return {
                 ...state,
                 error: action.error,
+                loading: false,
             };
             
         default:

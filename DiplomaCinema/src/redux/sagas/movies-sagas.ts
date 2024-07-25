@@ -1,6 +1,6 @@
 import { put, takeEvery } from "redux-saga/effects";
 import { IMovieOptions, IMoviesResponse } from "../../types";
-import { loadMovieDetailError, loadMovieDetailSuccess, loadMoviesError, setCurrentPage, setMovies, setQuery, setTotalResults } from "../action-creaters";
+import { loadMovieDetailError, loadMovieDetailSuccess, loadMoviesError, loadMoviesSuccess, setCurrentPage, setMovies, setQuery, setTotalResults } from "../action-creaters";
 import { LOAD_MOVIE_DETAIL, LOAD_MOVIES } from "../action-types";
 const API_KEY = 'b91ffaf5';
 
@@ -21,6 +21,8 @@ function* fetchLoadMovies(action: any) {
             yield put(setTotalResults(totalResults));
             yield put(setCurrentPage(page));
             yield put(setQuery(query));
+
+            yield put(loadMoviesSuccess());
         }
     } catch (error) {
         yield put(loadMoviesError(`${error}`));

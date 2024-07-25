@@ -9,14 +9,19 @@ import { Rating } from '../Rating';
 export const MovieDetail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { selectedMovie, error } = useSelector((state: IMovieState) => state);
+    const { selectedMovie, error, loading } = useSelector((state: IMovieState) => state);
 
     useEffect(() => {
         dispatch(loadMovieDetail(!!id ? id : ''));
     }, [dispatch, id]);
-
-    console.log(selectedMovie, error);
     
+    if (loading) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 7, px: 2 }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
 
     if (error) {
         return (

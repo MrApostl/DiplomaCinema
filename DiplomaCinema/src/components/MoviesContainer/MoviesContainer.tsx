@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { MovieCard } from "./MovieCard";
 import { useDispatch, useSelector } from 'react-redux'
 import { IMovieState } from "../../types";
@@ -7,7 +7,7 @@ import { loadMovies } from "../../redux/action-creaters";
 
 export const MoviesContainer = () => {
     const dispatch = useDispatch();
-    const { movies, currentPage, totalResults, query, error } = useSelector((state: IMovieState) => state);
+    const { movies, currentPage, totalResults, query, error, loading } = useSelector((state: IMovieState) => state);
 
     useEffect(() => {
         dispatch(loadMovies(currentPage, query));
@@ -28,6 +28,14 @@ export const MoviesContainer = () => {
             handlePageChange(currentPage - 1);
         }
     };
+
+    if (loading) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 7, px: 2 }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
 
     if (error) {
         return (
