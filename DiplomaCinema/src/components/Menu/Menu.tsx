@@ -10,8 +10,8 @@ export const Menu = ({ items }: IMenuProps) => {
             return '/';
         case 'Фильмы':
             return '/movies';
-        case 'Любимые':
-            return '/favorites';
+        case 'Тренды':
+            return '/trends';
         case 'Настройки':
             return '/settings';
         default:

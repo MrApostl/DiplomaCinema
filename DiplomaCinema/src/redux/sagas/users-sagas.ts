@@ -1,4 +1,4 @@
-//email: uefed@mailto.plus
+//email: uefed@mailto.plus || qkyded@mailto.plus
 //pass: TAYu5TTD
 //user: ssdgdd5fergQR2BtV7d
 //token: http://studapi.teachmeskills.by//activate/ODQyMg/c8xmd0-5702fd8fb61a423a3ad832c935d7039d

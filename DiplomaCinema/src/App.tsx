@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
 import { getUser } from './redux/action-creaters'
 import { IStoreState } from './types'
+import { Uncertain } from './components/Uncertain'
 
 function App() {
   const dispatch = useDispatch();
@@ -46,67 +47,33 @@ function App() {
                     <UserProfile/>
                 </Toolbar>
                 <Toolbar sx={{ justifyContent: 'center', flexWrap: 'wrap', py: 1 }}>
-                  <Menu items={['Главная', 'Фильмы', 'Любимые', 'Настройки']} />
+                  <Menu items={['Главная', 'Фильмы', 'Тренды', 'Настройки']} />
                 </Toolbar>
             </AppBar>
             <Routes>
               <Route path="/">
-                <Route index element={ 
-                  <Box sx={{ width: '100%', mt: 2 }}>
-                    {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
-                    <SignIn/>}
-                  </Box>
-                }/>
+                <Route index element={isUserAutorized ? <Uncertain text={' Добро пожаловать в pixema '}/> : <SignIn/>}/>
 
-              <Route path='signUp' element={
-                <div>
-                  {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
-                    <SignUp/>}
-                </div>
-              }/>
+              <Route path='signUp' element={isUserAutorized ? <Uncertain text={' Вы уже вошли в аккаунт'}/> : <SignUp/>}/>
 
-              <Route path='registrationConfirm' element={
-                <div>
-                  {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
-                    <RegistrationConfirm/>}
-                </div>
-              }/>
-              <Route path='registrationSuccess' element={
-                <div>
-                  {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
-                    <RegistrationSuccess/>}
-                </div>
-              }/>
-              <Route path='/:uid/:token' element={
-                <div>
-                  {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
-                    <RegistrationActivate/>}
-                </div>
-              }/>
+              <Route path='registrationConfirm' element={isUserAutorized ? <Uncertain text={' Вы уже вошли в аккаунт'}/> : <RegistrationConfirm/>}/>
+              <Route path='registrationSuccess' element={isUserAutorized ? <Uncertain text={' Вы уже вошли в аккаунт'}/> : <RegistrationSuccess/>}/>
+              <Route path='/:uid/:token' element={isUserAutorized ? <Uncertain text={' Вы уже вошли в аккаунт'}/> : <RegistrationActivate/>}/>
 
-                <Route path="*" element={<Box sx={{ width: '100%', mt: 2 }}> Страница не найдена </Box>}/>
+                <Route path="*" element={<Uncertain text={'Страница не найдена'}/>}/>
                 <Route path="movies">
                   <Route index element={ 
-                    <Box sx={{ width: '100%', mt: 2 }}>
-                      {!isUserAutorized ? <Box> Вы не вошли в аккаунт </Box> : 
-                      <Box>
-                        <SearchBar placeholder="Поиск..." />
-                        <MoviesContainer/>
-                      </Box> }
+                    !isUserAutorized ? <Uncertain text={'Вы не вошли в аккаунт'}/> :
+                    <Box sx={{ width: '100%', mt: 2 }}> 
+                      <SearchBar placeholder="Поиск..." />
+                      <MoviesContainer/>
                     </Box>
                   }/>
-                  <Route path=":id" element={!isUserAutorized ? <Box> Вы не вошли в аккаунт </Box> : <MovieDetail/>}/>
+                  <Route path=":id" element={!isUserAutorized ? <Uncertain text={'Вы не вошли в аккаунт'}/> : <MovieDetail/>}/>
                 </Route>
 
-                <Route path="favorites" element={
-                  <Box sx={{ width: '100%', mt: 2 }}>
-                    {!isUserAutorized ? <Box> Вы не вошли в аккаунт </Box> : 'Избранные'}
-                  </Box>} />
-                <Route path="settings" element={
-                  <Box sx={{ width: '100%', mt: 2 }}>
-                    {!isUserAutorized ? <Box> Вы не вошли в аккаунт </Box> : 'Настройки'}
-                  </Box>
-                } />
+                <Route path="trends" element={!isUserAutorized ? <Uncertain text={'Вы не вошли в аккаунт'}/> : <Uncertain text={'Избранные'}/>} />
+                <Route path="settings" element={!isUserAutorized ? <Uncertain text={'Вы не вошли в аккаунт'}/> : <Uncertain text={'Настройки'}/>} />
               </Route>
             </Routes>
         </Box>
