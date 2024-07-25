@@ -11,7 +11,7 @@ const initialState: IMovieState = {
     query: '',
 };
 
-const movieReducer = (state = initialState, action: any)  => {
+export const movieReducer = (state = initialState, action: any)  => {
     switch (action.type) {
         case SET_MOVIES:
             const movies = !!action.movies ? action.movies : [] as IMovieOptions[]; 
@@ -88,5 +88,3 @@ const movieReducer = (state = initialState, action: any)  => {
             return state;
     }
 };
-
-export default movieReducer;

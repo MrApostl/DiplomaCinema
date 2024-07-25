@@ -1,13 +1,13 @@
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { MovieCard } from "./MovieCard";
 import { useDispatch, useSelector } from 'react-redux'
-import { IMovieState } from "../../types";
+import { IStoreState } from "../../types";
 import { useEffect } from "react";
 import { loadMovies } from "../../redux/action-creaters";
 
 export const MoviesContainer = () => {
     const dispatch = useDispatch();
-    const { movies, currentPage, totalResults, query, error, loading } = useSelector((state: IMovieState) => state);
+    const { movies, currentPage, totalResults, query, error, loading } = useSelector((state: IStoreState) => state.movies);
 
     useEffect(() => {
         dispatch(loadMovies(currentPage, query));
@@ -73,7 +73,7 @@ export const MoviesContainer = () => {
                 sx={{ 
                     display: 'flex', 
                     gap: 2, 
-                    mt: 2, 
+                    py: 2, 
                     flexDirection: { xs: 'column', sm: 'row' }, 
                     alignItems: 'center' 
                 }}
@@ -84,7 +84,7 @@ export const MoviesContainer = () => {
                     disabled={currentPage === 1}
                     sx={{
                         '&.Mui-disabled': {
-                            backgroundColor: '#2e060d', 
+                            backgroundColor: '#1c1c1c', 
                             color: '#fff',
                         },
                     }}
@@ -100,7 +100,7 @@ export const MoviesContainer = () => {
                     disabled={currentPage === Math.ceil(totalResults / 10)}
                     sx={{
                         '&.Mui-disabled': {
-                            backgroundColor: '#2e060d', 
+                            backgroundColor: '#1c1c1c', 
                             color: '#fff',
                         },
                     }}

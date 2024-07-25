@@ -15,7 +15,7 @@ export const MovieCard = ({ movie }: IMovieCardProps) => {
                 }
             }}
             component={Link} 
-            to={`/${movie.imdbID}`}
+            to={`/movies/${movie.imdbID}`}
             >
             <CardMedia
                 sx={{ height: { xs: 400, sm: 350, md: 300 }, borderTopLeftRadius: 2, borderTopRightRadius: 2 }}

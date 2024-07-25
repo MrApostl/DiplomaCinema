@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Box, CircularProgress, Typography, Card, CardContent, CardMedia } from '@mui/material';
 import { loadMovieDetail } from '../../../redux/action-creaters';
-import { IMovieState } from '../../../types';
+import { IStoreState } from '../../../types';
 import { Rating } from '../Rating';
 
 export const MovieDetail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { selectedMovie, error, loading } = useSelector((state: IMovieState) => state);
+    const { selectedMovie, error, loading } = useSelector((state: IStoreState) => state.movies);
 
     useEffect(() => {
         dispatch(loadMovieDetail(!!id ? id : ''));

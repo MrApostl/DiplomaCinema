@@ -11,6 +11,24 @@ export interface IMovieOptions {
     Response?: string;
 }
 
+export interface IStoreState {
+    movies: IMovieState;
+    users: IUserState;
+}
+
+export interface IUserState {
+    user: IUser;
+}
+
+export interface IUser {
+    username: string;
+}
+
+export interface IActivateOptions {
+    uid: string | undefined;
+    token: string | undefined;
+}
+
 export interface IMovieState {
     movies: IMovieOptions[];
     selectedMovie: IMovieOptions;
@@ -25,4 +43,10 @@ export interface IMoviesResponse {
     Search: IMovieOptions[];
     totalResults: string;
     Response?: string;
+}
+
+export interface ISign {
+    username?: string,
+    email: string,
+    password: string,
 }
