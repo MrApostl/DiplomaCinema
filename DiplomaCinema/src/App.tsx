@@ -1,22 +1,52 @@
 import { AppBar, Box, CssBaseline, Toolbar } from '@mui/material'
 import './App.css'
 import { Logo, Menu, SearchBar } from './components'
-import { MoviesContainer } from './components/MoviesContainer'
+import { MovieDetail, MoviesContainer } from './components/MoviesContainer'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
     <div>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#282c34', minHeight: '100vh', color: 'white', width: '1240px' }}>
+      <BrowserRouter>
+        <Box 
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: '#34282a',
+            minHeight: '100vh',
+            color: 'white',
+            width: '100%',
+            maxWidth: '1240px',
+            mx: 'auto', 
+            px: 2,
+            pb: 2,
+            boxSizing: 'border-box',
+          }}
+        >
             <CssBaseline />
-            <AppBar position="static" sx={{ backgroundColor: '#1c1c1c' }}>
-                <Toolbar sx={{ justifyContent: 'space-between' }}>
+            <AppBar position="static" sx={{ backgroundColor: '#1c1c1c', width: '100%' }}>
+                <Toolbar sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
                     <Logo text="pixema" />
                     <Menu items={['Home', 'Trends', 'Favorites', 'Settings']} />
                 </Toolbar>
             </AppBar>
-            <SearchBar placeholder="Search" />
-            <MoviesContainer/>
+            <Routes>
+              <Route path="/">
+                <Route index element={ 
+                  <Box sx={{ width: '100%', mt: 2 }}>
+                    <SearchBar placeholder="Search" />
+                    <MoviesContainer/>
+                  </Box>
+                }/>
+
+                <Route path="*" element={<Box>Страница не найдена</Box>}/>
+
+                <Route path=":id" element={<MovieDetail/>}/>
+              </Route>
+            </Routes>
         </Box>
+      </BrowserRouter>
     </div> 
   )
 }

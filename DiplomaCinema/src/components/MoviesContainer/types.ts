@@ -4,8 +4,10 @@ export interface IMovie {
     imdbID: string;
     Type: string;
     Poster: string;
-    Genre?: string[];
+    Genre?: string;
     imdbRating?: string;
+    Plot?: string;
+    Director?: string;
 }
 
 export interface IMoviesContainerProps {

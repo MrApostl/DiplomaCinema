@@ -2,37 +2,45 @@ import TextField from '@mui/material/TextField';
 import { ISearchBarProps } from './types';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage, setQuery } from '../../redux/action-creaters';
+import { useEffect, useState } from 'react';
 
 export const SearchBar = ({ placeholder } : ISearchBarProps) => {
     const dispatch = useDispatch();
+    const [searchTerm, setSearchTerm] = useState('');
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            dispatch(setQuery(searchTerm));
+            dispatch(setCurrentPage('1'));
+        }, 100);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [searchTerm]);
 
     const handleSearchChange = (searchValue: string) => {
-        dispatch(setQuery(searchValue));
-        dispatch(setCurrentPage("1"));
+        setSearchTerm(searchValue);
     };
     
     return (
         <TextField
-            variant="outlined"
+            variant='outlined'
             placeholder={placeholder}
             fullWidth
             onChange={(e) => handleSearchChange(e.target.value)}
             sx={{
                 mt: 2,
-                maxWidth: 500,
+                maxWidth: { xs: '100%', sm: 500 },
+                input: { color: 'white' },
+                fieldset: { borderColor: 'white' },
                 '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                        borderColor: 'white',
-                    },
                     '&:hover fieldset': {
                         borderColor: 'white',
                     },
                     '&.Mui-focused fieldset': {
                         borderColor: 'white',
                     },
-                },
-                '& .MuiInputBase-input': {
-                    color: 'white', 
                 },
             }}
         />

@@ -30,17 +30,46 @@ export const MoviesContainer = () => {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
+        <Box 
+            sx={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                mt: 2, 
+                px: { xs: 2, sm: 3, md: 4 } 
+            }}
+        >
+            <Box 
+                sx={{ 
+                    display: 'grid', 
+                    gap: 2, 
+                    gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr', lg: '1fr 1fr 1fr 1fr' }, 
+                    justifyItems: 'center' 
+                }}
+            >
                 {movies.map((movie) => ( 
                     <MovieCard key={movie.imdbID} movie={movie} />
                 ))}
             </Box>
-            <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+            <Box 
+                sx={{ 
+                    display: 'flex', 
+                    gap: 2, 
+                    mt: 2, 
+                    flexDirection: { xs: 'column', sm: 'row' }, 
+                    alignItems: 'center' 
+                }}
+            >
                 <Button 
                     variant="contained" 
                     onClick={handlePrevPage} 
                     disabled={currentPage === 1}
+                    sx={{
+                        '&.Mui-disabled': {
+                            backgroundColor: '#2e060d', 
+                            color: '#fff',
+                        },
+                    }}
                 >
                     Предыдущая
                 </Button>
@@ -51,6 +80,12 @@ export const MoviesContainer = () => {
                     variant="contained" 
                     onClick={handleNextPage} 
                     disabled={currentPage === Math.ceil(totalResults / 10)}
+                    sx={{
+                        '&.Mui-disabled': {
+                            backgroundColor: '#2e060d', 
+                            color: '#fff',
+                        },
+                    }}
                 >
                     Следующая
                 </Button>

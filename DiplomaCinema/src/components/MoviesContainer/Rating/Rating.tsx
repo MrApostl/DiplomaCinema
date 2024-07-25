@@ -6,8 +6,8 @@ export const Rating = ({ value } : RatingProps) => {
             sx={{
                 backgroundColor: '#61dafb',
                 borderRadius: '50%',
-                width: 40,
-                height: 40,
+                width: { xs: 30, sm: 40 },
+                height: { xs: 30, sm: 40 },
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
