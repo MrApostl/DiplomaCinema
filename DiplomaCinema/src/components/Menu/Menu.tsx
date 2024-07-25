@@ -6,13 +6,13 @@ import { IMenuProps } from './types';
 export const Menu = ({ items }: IMenuProps) => {
     const getPath = (text: string) => {
         switch (text) {
-        case 'Home':
+        case 'Главная':
             return '/';
-        case 'Movies':
+        case 'Фильмы':
             return '/movies';
-        case 'Favorites':
+        case 'Любимые':
             return '/favorites';
-        case 'Settings':
+        case 'Настройки':
             return '/settings';
         default:
             return '/';

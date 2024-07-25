@@ -21,7 +21,7 @@ export const SignIn = () => {
     return (
         <Paper elevation={3} sx={{ padding: 4, maxWidth: 400, margin: 'auto', mt: 5 }}>
             <Typography variant="h4" component="h1" align="center" gutterBottom>
-                Sign In
+                Войти в аккаунт
             </Typography>
             <form onSubmit={handleSubmit}>
                 <Box sx={{ mb: 3 }}>
@@ -46,15 +46,15 @@ export const SignIn = () => {
                 </Box>
                 <Box sx={{ mb: 2 }}>
                     <Link href="#" variant="body2">
-                        Forgot Password?
+                        Забыли пароль?
                     </Link>
                 </Box>
                 <Button type="submit" variant="contained" color="primary" fullWidth>
-                    Sign In
+                    Войти
                 </Button>
                 <Box sx={{ mt: 2, textAlign: 'center' }}>
                     <Typography variant="body2">
-                        Don't have an account? <Link href="#">Sign Up</Link>
+                        Нет аккаунта? <Link href="/signUp">Создать</Link>
                     </Typography>
                 </Box>
             </form>

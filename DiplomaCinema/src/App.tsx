@@ -3,7 +3,7 @@ import './App.css'
 import { Logo, Menu, SearchBar, UserProfile } from './components'
 import { MovieDetail, MoviesContainer } from './components/MoviesContainer'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { SignIn } from './components/SignUser'
+import { SignIn, SignUp } from './components/SignUser'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
 import { getUser } from './redux/action-creaters'
@@ -44,39 +44,46 @@ function App() {
                     <UserProfile/>
                 </Toolbar>
                 <Toolbar sx={{ justifyContent: 'center', flexWrap: 'wrap', py: 1 }}>
-                  <Menu items={['Home', 'Movies', 'Favorites', 'Settings']} />
+                  <Menu items={['Главная', 'Фильмы', 'Любимые', 'Настройки']} />
                 </Toolbar>
             </AppBar>
             <Routes>
               <Route path="/">
                 <Route index element={ 
                   <Box sx={{ width: '100%', mt: 2 }}>
-                    {isUserAutorized ? <div> Вы уже вошли в аккаунт </div> : 
+                    {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
                     <SignIn/>}
                   </Box>
                 }/>
+
+              <Route path='signUp' element={
+                <div>
+                  {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
+                    <SignUp/>}
+                </div>
+              }/>
 
                 <Route path="*" element={<Box>Страница не найдена</Box>}/>
                 <Route path="movies">
                   <Route index element={ 
                     <Box sx={{ width: '100%', mt: 2 }}>
-                      {!isUserAutorized ? <div> Вы не вошли в аккаунт </div> : 
+                      {!isUserAutorized ? <Box> Вы не вошли в аккаунт </Box> : 
                       <Box>
-                        <SearchBar placeholder="Search" />
+                        <SearchBar placeholder="Поиск..." />
                         <MoviesContainer/>
                       </Box> }
                     </Box>
                   }/>
-                  <Route path=":id" element={!isUserAutorized ? <div> Вы не вошли в аккаунт </div> : <MovieDetail/>}/>
+                  <Route path=":id" element={!isUserAutorized ? <Box> Вы не вошли в аккаунт </Box> : <MovieDetail/>}/>
                 </Route>
 
                 <Route path="favorites" element={
                   <Box sx={{ width: '100%', mt: 2 }}>
-                    {!isUserAutorized ? <div> Вы не вошли в аккаунт </div> : 'Избранные'}
+                    {!isUserAutorized ? <Box> Вы не вошли в аккаунт </Box> : 'Избранные'}
                   </Box>} />
                 <Route path="settings" element={
                   <Box sx={{ width: '100%', mt: 2 }}>
-                    {!isUserAutorized ? <div> Вы не вошли в аккаунт </div> : 'Настройки'}
+                    {!isUserAutorized ? <Box> Вы не вошли в аккаунт </Box> : 'Настройки'}
                   </Box>
                 } />
               </Route>
