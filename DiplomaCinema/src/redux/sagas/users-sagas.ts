@@ -11,6 +11,9 @@ import { getToken } from "../../helpers/_utils";
 
 function* fetchCreateUser(action: any){
     const { user } = action;
+
+    console.log(user);
+    
     const url = `https://studapi.teachmeskills.by/auth/users/`;
     const response: Response = yield fetch(url, {
         method: 'POST',
@@ -19,7 +22,8 @@ function* fetchCreateUser(action: any){
         },
         body: JSON.stringify(user),
     });
-    if( response.status === 204){
+
+    if(response.status === 201 || response.status === 204){
         window.location.pathname = './registrationConfirm';
     }
 }
@@ -36,13 +40,18 @@ function* fetchConfirmUser(action: any){
         body: JSON.stringify(activateOptions),
     });
 
-    if( response.status === 204){
+    console.log(response, activateOptions);
+    
+    if( response.status === 201 || response.status === 204 || response.status === 403){
         window.location.pathname = './registrationSuccess';
     }
 }
 
 function* fetchCreateJwt(action: any){
     const { user } = action;
+
+    console.log(user);
+    
     const url = `https://studapi.teachmeskills.by/auth/jwt/create/`;
     const response: Response = yield fetch(url, {
         method: 'POST',
@@ -57,8 +66,7 @@ function* fetchCreateJwt(action: any){
         localStorage.setItem('access', access);
         localStorage.setItem('refresh', refresh);
 
-        const pathOrigin = window.location.origin;
-        window.location.assign(`${pathOrigin}/movies`);
+        window.location.assign('/movies');
     }
 }
 

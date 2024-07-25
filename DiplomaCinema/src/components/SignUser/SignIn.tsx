@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Box, TextField, Typography, Button, Link, Paper } from '@mui/material';
 import { createJwt } from '../../redux/action-creaters/users-action-creaters';
-import { ISign } from '../../types';
+import { IUser } from '../../types';
 
 export const SignIn = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const SignIn = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        const userData: ISign = { email: signInState.email, password: signInState.password };
+        const userData: IUser = { email: signInState.email, password: signInState.password };
         dispatch(createJwt(userData));
     };
 

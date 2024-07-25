@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { Box, Button, Container, TextField, Typography, Link } from "@mui/material";
 import { createUser } from "../../redux/action-creaters";
-import { ISign } from "../../types";
+import { IUser } from "../../types";
 
 export const SignUp = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [signUpState, setSignUpState] = useState({
         name: '',
@@ -19,14 +17,13 @@ export const SignUp = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (signUpState.password === signUpState.confirmPassword) {
-            const userData: ISign = {
+            const userData: IUser = {
                 username: signUpState.name,
                 email: signUpState.email,
                 password: signUpState.password
             };
 
             dispatch(createUser(userData));
-            navigate('/');
         } else {
             alert("Пароли не совпадают");
             return;

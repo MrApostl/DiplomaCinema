@@ -20,10 +20,6 @@ export interface IUserState {
     user: IUser;
 }
 
-export interface IUser {
-    username: string;
-}
-
 export interface IActivateOptions {
     uid: string | undefined;
     token: string | undefined;
@@ -45,8 +41,8 @@ export interface IMoviesResponse {
     Response?: string;
 }
 
-export interface ISign {
+export interface IUser {
     username?: string,
-    email: string,
-    password: string,
+    email?: string,
+    password?: string,
 }

@@ -1,9 +1,8 @@
 import { AppBar, Box, CssBaseline, Toolbar } from '@mui/material'
 import './App.css'
-import { Logo, Menu, SearchBar, UserProfile } from './components'
+import { Logo, Menu, SearchBar, UserProfile, RegistrationActivate, RegistrationConfirm, RegistrationSuccess, SignIn, SignUp } from './components'
 import { MovieDetail, MoviesContainer } from './components/MoviesContainer'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { SignIn, SignUp } from './components/SignUser'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
 import { getUser } from './redux/action-creaters'
@@ -17,6 +16,9 @@ function App() {
         dispatch(getUser());
       }
   }, []);
+
+  console.log(localStorage.getItem('access'));
+  
 
   const {user} = useSelector((state: IStoreState) => state.users);
   const isUserAutorized = !!user && Object.keys(user).length > 0;
@@ -63,7 +65,26 @@ function App() {
                 </div>
               }/>
 
-                <Route path="*" element={<Box>Страница не найдена</Box>}/>
+              <Route path='registrationConfirm' element={
+                <div>
+                  {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
+                    <RegistrationConfirm/>}
+                </div>
+              }/>
+              <Route path='registrationSuccess' element={
+                <div>
+                  {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
+                    <RegistrationSuccess/>}
+                </div>
+              }/>
+              <Route path='/:uid/:token' element={
+                <div>
+                  {isUserAutorized ? <Box> Вы уже вошли в аккаунт </Box> : 
+                    <RegistrationActivate/>}
+                </div>
+              }/>
+
+                <Route path="*" element={<Box sx={{ width: '100%', mt: 2 }}> Страница не найдена </Box>}/>
                 <Route path="movies">
                   <Route index element={ 
                     <Box sx={{ width: '100%', mt: 2 }}>

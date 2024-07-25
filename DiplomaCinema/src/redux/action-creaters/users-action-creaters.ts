@@ -1,7 +1,7 @@
-import { IActivateOptions, ISign, IUserState } from "../../types"
+import { IActivateOptions, IUser, IUserState } from "../../types"
 import { CONFIRM_USER, CREATE_JWT, CREATE_USER, GET_USER, SET_USER } from "../action-types/users-action-types"
 
-export const createUser = (user: ISign) =>({
+export const createUser = (user: IUser) =>({
     type: CREATE_USER,
     user,
 }) as const
@@ -11,7 +11,7 @@ export const confirmUser = (activateOptions: IActivateOptions) =>({
     activateOptions,
 }) as const
 
-export const createJwt = (user: ISign) =>({
+export const createJwt = (user: IUser) =>({
     type: CREATE_JWT,
     user,
 }) as const
