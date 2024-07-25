@@ -12,7 +12,7 @@ export const SearchBar = ({ placeholder } : ISearchBarProps) => {
         const handler = setTimeout(() => {
             dispatch(setQuery(searchTerm));
             dispatch(setCurrentPage('1'));
-        }, 100);
+        }, 300);
 
         return () => {
             clearTimeout(handler);

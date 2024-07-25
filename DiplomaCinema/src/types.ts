@@ -8,6 +8,7 @@ export interface IMovieOptions {
     imdbRating?: string;
     Plot?: string;
     Director?: string;
+    Response?: string;
 }
 
 export interface IMovieState {
@@ -22,4 +23,5 @@ export interface IMovieState {
 export interface IMoviesResponse {
     Search: IMovieOptions[];
     totalResults: string;
+    Response?: string;
 }

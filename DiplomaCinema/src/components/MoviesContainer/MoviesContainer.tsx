@@ -2,12 +2,12 @@ import { Box, Button, Typography } from "@mui/material";
 import { MovieCard } from "./MovieCard";
 import { useDispatch, useSelector } from 'react-redux'
 import { IMovieState } from "../../types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { loadMovies } from "../../redux/action-creaters";
 
 export const MoviesContainer = () => {
     const dispatch = useDispatch();
-    const { movies, currentPage, totalResults, query } = useSelector((state: IMovieState) => state);
+    const { movies, currentPage, totalResults, query, error } = useSelector((state: IMovieState) => state);
 
     useEffect(() => {
         dispatch(loadMovies(currentPage, query));
@@ -29,6 +29,16 @@ export const MoviesContainer = () => {
         }
     };
 
+    if (error) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 7, px: 2 }}>
+                <Typography color="error" variant="h6">
+                    {error}
+                </Typography>
+            </Box>
+        );
+    }
+
     return (
         <Box 
             sx={{ 
@@ -43,7 +53,7 @@ export const MoviesContainer = () => {
                 sx={{ 
                     display: 'grid', 
                     gap: 2, 
-                    gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr', lg: '1fr 1fr 1fr 1fr' }, 
+                    gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr', lg: '1fr 1fr 1fr 1fr 1fr' }, 
                     justifyItems: 'center' 
                 }}
             >

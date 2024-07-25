@@ -15,12 +15,17 @@ export const MovieDetail = () => {
         dispatch(loadMovieDetail(!!id ? id : ''));
     }, [dispatch, id]);
 
-    if (error) {
-        return <Typography color="error">{error}</Typography>;
-    }
+    console.log(selectedMovie, error);
+    
 
-    if (!selectedMovie) {
-        return null;
+    if (error) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 7, px: 2 }}>
+                <Typography color="error" variant="h6">
+                    {error}
+                </Typography>
+            </Box>
+        );
     }
 
     return (
