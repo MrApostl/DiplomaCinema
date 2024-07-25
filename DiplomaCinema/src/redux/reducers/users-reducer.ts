@@ -16,6 +16,16 @@ export const usersReducer = (state: IUserState = initialState, action: any) =>{
             })
         }
 
+        case 'LOGOUT_USER':{
+            localStorage.removeItem('access');
+            localStorage.removeItem('refresh');
+
+            return ({
+                ...state,
+                user: {} as IUser
+            });
+        };
+            
         default: {
             return state;
         }

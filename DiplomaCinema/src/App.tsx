@@ -4,9 +4,10 @@ import { Logo, Menu, SearchBar, UserProfile } from './components'
 import { MovieDetail, MoviesContainer } from './components/MoviesContainer'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { SignIn } from './components/SignUser'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
 import { getUser } from './redux/action-creaters'
+import { IStoreState } from './types'
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ function App() {
       }
   }, []);
 
+  const {user} = useSelector((state: IStoreState) => state.users);
+  const isUserAutorized = !!user && Object.keys(user).length > 0;
   
   return (
     <BrowserRouter>
@@ -48,7 +51,8 @@ function App() {
               <Route path="/">
                 <Route index element={ 
                   <Box sx={{ width: '100%', mt: 2 }}>
-                    <SignIn/>
+                    {isUserAutorized ? <div> Вы уже вошли в аккаунт </div> : 
+                    <SignIn/>}
                   </Box>
                 }/>
 
@@ -56,20 +60,23 @@ function App() {
                 <Route path="movies">
                   <Route index element={ 
                     <Box sx={{ width: '100%', mt: 2 }}>
-                      <SearchBar placeholder="Search" />
-                      <MoviesContainer/>
+                      {!isUserAutorized ? <div> Вы не вошли в аккаунт </div> : 
+                      <Box>
+                        <SearchBar placeholder="Search" />
+                        <MoviesContainer/>
+                      </Box> }
                     </Box>
                   }/>
-                  <Route path=":id" element={<MovieDetail/>}/>
+                  <Route path=":id" element={!isUserAutorized ? <div> Вы не вошли в аккаунт </div> : <MovieDetail/>}/>
                 </Route>
 
                 <Route path="favorites" element={
                   <Box sx={{ width: '100%', mt: 2 }}>
-                    Избранные
+                    {!isUserAutorized ? <div> Вы не вошли в аккаунт </div> : 'Избранные'}
                   </Box>} />
                 <Route path="settings" element={
                   <Box sx={{ width: '100%', mt: 2 }}>
-                    Настройки
+                    {!isUserAutorized ? <div> Вы не вошли в аккаунт </div> : 'Настройки'}
                   </Box>
                 } />
               </Route>

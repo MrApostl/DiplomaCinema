@@ -13,76 +13,83 @@ const initialState: IMovieState = {
 
 export const movieReducer = (state = initialState, action: any)  => {
     switch (action.type) {
-        case SET_MOVIES:
+        case SET_MOVIES:{
             const movies = !!action.movies ? action.movies : [] as IMovieOptions[]; 
-            return {
+            return ({
                 ...state,
                 movies,
                 error: '',
-            };
-
+            });
+        };
+            
         case SET_CURRENT_PAGE:{
-            return({
+            return ({
                     ...state,
                     currentPage: !!action.currentPage ? +action.currentPage : 1,
-                })
-            };
+            })
+        };
 
         case SET_TOTAL_RESULTS:{
-            return({
+            return ({
                     ...state,
                     totalResults: !!action.totalResults ? +action.totalResults : 1, 
-                })
-            };
+            })
+        };
 
         case SET_QUERY:{
-            return({
+            return ({
                     ...state,
                     query: !!action.query ? action.query : '',
-                });
-            };
+            });
+        };
 
-        case LOAD_MOVIES:
-            return {
+        case LOAD_MOVIES:{
+            return ({
                 ...state,
                 error: '',
                 loading: true,
-            };
-
-        case LOAD_MOVIES_SUCCESS:
-            return {
+            });
+        };
+            
+        case LOAD_MOVIES_SUCCESS:{
+            return ({
                 ...state,
                 error: '',
                 loading: false,
-            };
+            });
+        };           
             
-        case LOAD_MOVIE_DETAIL:
-            return {
+        case LOAD_MOVIE_DETAIL:{
+            return ({
                 ...state,
                 error: '',
                 loading: true,
-            };
-
-        case LOAD_MOVIE_DETAIL_SUCCESS:
-            return {
+            });
+        };
+            
+        case LOAD_MOVIE_DETAIL_SUCCESS:{
+            return ({
                 ...state,
                 selectedMovie: action.movie,
                 loading: false,
-            };
-
-        case LOAD_MOVIE_DETAIL_ERROR:
-            return {
+            });
+        };
+            
+        case LOAD_MOVIE_DETAIL_ERROR:{
+            return ({
                 ...state,
                 error: action.error,
                 loading: false,
-            };
-
-        case LOAD_MOVIES_ERROR:
-            return {
+            });
+        };
+            
+        case LOAD_MOVIES_ERROR:{
+            return ({
                 ...state,
                 error: action.error,
                 loading: false,
-            };
+            });
+        };
             
         default:
             return state;

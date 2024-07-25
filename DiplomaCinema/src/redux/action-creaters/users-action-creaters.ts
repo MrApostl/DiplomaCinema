@@ -24,3 +24,7 @@ export const setUser = (user: IUserState) =>({
     type: SET_USER,
     user,
 }) as const
+
+export const logoutUser = () => ({
+    type: 'LOGOUT_USER'
+}) as const
