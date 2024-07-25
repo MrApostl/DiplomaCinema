@@ -2,23 +2,9 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import { IMenuProps } from './types';
+import { getPath } from '../../helpers';
 
 export const Menu = ({ items }: IMenuProps) => {
-    const getPath = (text: string) => {
-        switch (text) {
-        case 'Главная':
-            return '/';
-        case 'Фильмы':
-            return '/movies';
-        case 'Тренды':
-            return '/trends';
-        case 'Настройки':
-            return '/settings';
-        default:
-            return '/';
-        }
-    };
-
     return (
         <Box 
         sx={{

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { confirmUser } from "../../redux/action-creaters";
 
 export const RegistrationActivate = () => {
@@ -12,7 +12,7 @@ export const RegistrationActivate = () => {
         if (uid && token) {
             dispatch(confirmUser({ uid, token }));
         }
-    }, [uid, token, dispatch]);
+    }, [uid, token]);
 
     return (
         <Box
